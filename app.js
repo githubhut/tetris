@@ -4,6 +4,7 @@ const width = 10;
 const scoreDisplay = document.querySelector("#score");
 const highscoreDisplay = document.querySelector("#highScore");
 const startBtn = document.querySelector("#start");
+const refresh = document.querySelector(".refresh");
 let timerID;
 let nextRandom = 0;
 let score = 0;
@@ -208,10 +209,10 @@ function addScore(){
 
 function gameOver(){
   if(current.some(index => squares[currentPosition + index].classList.contains("taken"))){
-    // if(hghscr < score)  {
-    //   highscoreDisplay.innerHTML = score
-    //   hghscr = score;
-    // }
+    if(hghscr < score)  {
+      highscoreDisplay.innerHTML = score
+      hghscr = score;
+    }
     scoreDisplay.innerHTML = "end";
     clearInterval(timerID);
   }
@@ -226,3 +227,28 @@ function handleKeyDown(event) {
 
 document.addEventListener("keydown", handleKeyDown);
 
+
+refresh.addEventListener("click",() =>{
+
+  for(let i = 0; i <= 199; i++){
+    squares[i].classList.remove("taken");
+    squares[i].classList.remove("tetromino");
+    squares[i].style.backgroundColor = "";
+  }
+  currentPosition = 4;
+  currentRotation = 0;
+  random =  Math.floor(Math.random()*theTetrominoes.length);
+  current = theTetrominoes[random][currentRotation]
+
+  displaySquares.forEach(index => {
+    index.classList.remove("tetromino");
+    index.style.backgroundColor = "";
+  })
+
+  score = 0;
+  scoreDisplay.innerHTML = 0;
+
+  clearInterval(timerID);
+  timerID = null;
+  canMove = false;
+})
