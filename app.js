@@ -126,8 +126,8 @@ function freeze(){
     currentPosition = 4;
     draw();
     displayShape();
-    gameOver();
     addScore();
+    gameOver();
   }
 
 }
@@ -209,12 +209,18 @@ function addScore(){
 
 function gameOver(){
   if(current.some(index => squares[currentPosition + index].classList.contains("taken"))){
+    canMove = false;
     if(hghscr < score)  {
       highscoreDisplay.innerHTML = score
       hghscr = score;
     }
     scoreDisplay.innerHTML = "end";
     clearInterval(timerID);
+    squares.forEach(cell =>{
+      if(!cell.classList.contains("taken")){
+        cell.style.backgroundColor = "#94b8b8";
+      }
+    })
   }
 }
 

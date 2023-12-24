@@ -11,6 +11,14 @@ h3{
     color: darkgray;
 }
 
+.scrs{
+    /* padding-top: 500px; */
+    display: flex;
+}
+.scrs div h3{
+    padding-left: 15px;
+}
+
 .title{
     position:relative;
     display:flex;
